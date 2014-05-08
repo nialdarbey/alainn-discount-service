@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper"
+<mule xmlns:bpm="http://www.mulesoft.org/schema/mule/bpm" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:db="http://www.mulesoft.org/schema/mule/db"
 	xmlns:https="http://www.mulesoft.org/schema/mule/https"
@@ -19,6 +19,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.mulesoft.org/schema/mule/bpm http://www.mulesoft.org/schema/mule/bpm/current/mule-bpm.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd">
 
@@ -45,7 +46,12 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 		port="3306" user="mule" password="Mule1379" database="alainn"
 		doc:name="MySQL Configuration" />
     <data-mapper:config name="xml_to_map" transformationGraphPath="xml_to_map.grf" doc:name="xml_to_map"/>
-    <data-mapper:config name="pojo_to_xml" transformationGraphPath="pojo_to_xml.grf" doc:name="pojo_to_xml"/>
+    <data-mapper:config name="XML_To_Pojo" transformationGraphPath="xml_to_pojo.grf" doc:name="XML_To_Pojo"/>
+    <bpm:drools></bpm:drools>
+    <spring:beans>
+        <spring:bean name="NoFactsBean" class="java.util.ArrayList"/>
+    </spring:beans>
+    <data-mapper:config name="Pojo_To_XML" transformationGraphPath="pojo_to_xml.grf" doc:name="Pojo_To_XML"/>
     
 	<flow name="DiscountserviceFlow1" doc:name="DiscountserviceFlow1">
 		<https:inbound-endpoint exchange-pattern="request-response"
@@ -53,13 +59,16 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 			connector-ref="httpsConnector" />
 		<cxf:proxy-service doc:name="Proxy service"
 			namespace="http://www.alainn.com/SOA/service/Discount/1.0" port="DiscountPort"
-			service="DiscountService" wsdlLocation="DiscountService.wsdl" payload="body" />
+			service="DiscountService" wsdlLocation="service/DiscountService.wsdl" payload="body" />
 		<set-variable variableName="opName"
 			value="#[xpath('fn:local-name(/*)')]" doc:name="opName" />
+        <mulexml:dom-to-xml-transformer doc:name="DOM to XML"/>
 		<choice doc:name="Choice">
 			<when expression="#[opName == 'calculateDiscount']">
-                <logger level="INFO" doc:name="Logger"/>
-                <data-mapper:transform config-ref="pojo_to_xml" doc:name="Pojo To XML"/>
+                <data-mapper:transform config-ref="XML_To_Pojo" doc:name="XML&lt;calculateDiscount&gt; To OrderSummary"/>
+                <bpm:rules rulesDefinition="rules.drl" initialFacts-ref="NoFactsBean"></bpm:rules>
+                <set-payload value="#[payload.object]" doc:name="Resulting fact"/>
+                <data-mapper:transform config-ref="Pojo_To_XML" doc:name="Pojo To XML"/>
 
 			</when>
 			<otherwise>

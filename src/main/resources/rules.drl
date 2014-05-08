@@ -1,0 +1,29 @@
+package com.alainn.soa.rules.discount;
+
+global org.mule.module.bpm.MessageService mule;
+
+dialect "mvel"
+
+rule "Gold: 5 or more items for a total value of at least 60"
+    lock-on-active
+when
+	$orderSummary : OrderSummary( totalValue > 60, numberOfItems >= 10, loyaltyPoints > 100)
+then
+	$orderSummary.setDiscount(0.25);
+end
+
+rule "Silver: 3 or more items for a total value of at least 20"
+    lock-on-active
+when
+	$orderSummary : OrderSummary( totalValue > 20 && <= 40, numberOfItems >= 1, loyaltyPoints > 80)
+then
+	$orderSummary.setDiscount(0.15);
+end
+
+rule "Bronze: 2 or more items for a total value of at least 10"
+    lock-on-active
+when
+	$orderSummary : OrderSummary( totalValue > 10 && <= 20, numberOfItems >= 3, loyaltyPoints > 70)
+then
+	$orderSummary.setDiscount(0.10);
+end
