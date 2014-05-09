@@ -131,7 +131,7 @@
 output.__id = input.__id;
 output.__parent_id = input.__parent_id;
 //END -> DO NOT REMOVE
-output.price = input.price + input.price;
+output.price = input.price;
 output.quantity = input.transactionQuantity;]]></attr>
 </Node>
 <Node enabled="enabled" guiName="Foreach 'ns0:calculateDiscount' -&gt; 'object'" guiX="460" guiY="20" id="FOREACH_NS0_CALCULATE_DISCOUNT_OBJECT" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">

@@ -66,7 +66,7 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 		<choice doc:name="Choice">
 			<when expression="#[opName == 'calculateDiscount']">
                 <data-mapper:transform config-ref="XML_To_Pojo" doc:name="XML&lt;calculateDiscount&gt; To OrderSummary"/>
-                <bpm:rules rulesDefinition="rules.drl" initialFacts-ref="NoFactsBean"></bpm:rules>
+                <bpm:rules rulesDefinition="rules.drl" initialFacts-ref="NoFactsBean" doc:name="Rules Engine"></bpm:rules>
                 <set-payload value="#[payload.object]" doc:name="Resulting fact"/>
                 <data-mapper:transform config-ref="Pojo_To_XML" doc:name="Pojo To XML"/>
 

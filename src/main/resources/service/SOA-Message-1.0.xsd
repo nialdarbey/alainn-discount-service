@@ -372,6 +372,8 @@
 		<complexType>
 			<sequence>
 				<element ref="mod:Discount" />
+				<element ref="mod:TotalCost" />
+				<element ref="mod:LoyaltyPoints" />
 			</sequence>
 		</complexType>
 	</element>

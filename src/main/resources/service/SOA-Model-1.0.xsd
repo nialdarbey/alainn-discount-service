@@ -7,6 +7,8 @@
 	<element name="Type" type="string" />
 	<element name="ItemSku" type="tns:skuType" />
 	<element name="TransactedSku" type="tns:transactedSkuType" />
+	<element name="TotalCost" type="float" />
+	<element name="LoyaltyPoints" type="integer" />
 	<element name="SkuQuantity" type="integer" />
 	<element name="ItemId" type="string" />
 	<element name="Order" type="tns:orderType" />

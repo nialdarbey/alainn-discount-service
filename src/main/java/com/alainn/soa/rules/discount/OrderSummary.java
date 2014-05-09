@@ -12,16 +12,24 @@ public class OrderSummary {
 	
 	private double totalValue;
 	
-	private int numberOfItems;
+	private double discountPercentage = 0;
 	
-	private double discount = 0;
+	private int newLoyaltyPoints;
 
-	public double getDiscount() {
-		return discount;
+	public int getNewLoyaltyPoints() {
+		return newLoyaltyPoints;
 	}
 
-	public void setDiscount(double discount) {
-		this.discount = discount;
+	public void setNewLoyaltyPoints(int newLoyaltyPoints) {
+		this.newLoyaltyPoints = newLoyaltyPoints;
+	}
+
+	public double getDiscountPercentage() {
+		return discountPercentage;
+	}
+
+	public void setDiscountPercentage(double discount) {
+		this.discountPercentage = discount;
 	}
 
 	public int getLoyaltyPoints() {
@@ -42,14 +50,6 @@ public class OrderSummary {
 
 	public void setTotalValue(double totalValue) {
 		this.totalValue = totalValue;
-	}
-
-	public int getNumberOfItems() {
-		return this.orderItemSummaries.size();
-	}
-
-	public void setNumberOfItems(int numberOfItems) {
-		this.numberOfItems = numberOfItems;
 	}
 
 	public List<OrderItemSummary> getOrderItemSummaries() {
