@@ -2,39 +2,39 @@
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="alainn-discount-service">
     <global-element name="HTTP\HTTPS" type="org.mule.tooling.ui.modules.core.global.httpsConnector" entity-id="HTTP-HTTPS#1">
         <properties>
+            <property name="proxyUsername"/>
             <property name="reuseAddress"/>
+            <property name="receiveBacklog" value="0"/>
             <property name="enableCookies"/>
             <property name="serverSoTimeout" value="10000"/>
             <property name="socketSoLinger" value="0"/>
             <property name="failOnUnresolvedHost"/>
+            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/connector"/>
+            <property name="validateConnections" value="true"/>
             <property name="clientSoTimeout" value="10000"/>
+            <property name="keepAlive"/>
+            <property name="sendTcpNoDelay"/>
+            <property name="label"/>
+            <property name="proxyPort"/>
             <property name="socketMaxWait"/>
             <property name="cookieSpec" value="netscape"/>
+            <property name="dispatcherPoolFactory-ref"/>
+            <property name="connectionTimeout"/>
             <property name="receiveBufferSize" value="0"/>
             <property name="proxyHostname"/>
             <property name="name" value="httpsConnector"/>
             <property name="dynamicNotification"/>
             <property name="sendBufferSize" value="0"/>
             <property name="ENABLE_MODE_SWITCH"/>
-            <property name="auxiliary;index" value="1"/>
             <property name="proxyPassword"/>
-            <property name="proxyUsername"/>
-            <property name="receiveBacklog" value="0"/>
-            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/https/connector"/>
-            <property name="validateConnections" value="true"/>
-            <property name="label"/>
-            <property name="sendTcpNoDelay"/>
-            <property name="keepAlive"/>
-            <property name="proxyPort"/>
-            <property name="dispatcherPoolFactory-ref"/>
-            <property name="connectionTimeout"/>
+            <property name="auxiliary;index" value="1"/>
             <property-collection name="@http://www.mulesoft.org/schema/mule/https/tls-key-store;0">
-                <property name="path" value="keystore.jks"/>
                 <property name="storePassword" value="changeit"/>
+                <property name="path" value="keystore.jks"/>
                 <property name="keyPassword" value="changeit"/>
                 <property name="isProcessed$$$$ " value="true"/>
-                <property name="auxiliary;index" value="3"/>
                 <property name="auxiliary;wrapIn" value="3"/>
+                <property name="auxiliary;index" value="3"/>
             </property-collection>
         </properties>
     </global-element>
@@ -52,9 +52,9 @@
             <property name="local-override"/>
             <property name="system-properties-mode"/>
             <property name="file-encoding"/>
-            <property name="auxiliary;index" value="7"/>
-            <property name="ignore-unresolvable"/>
             <property name="ignore-resource-not-found"/>
+            <property name="ignore-unresolvable"/>
+            <property name="auxiliary;index" value="7"/>
         </properties>
     </global-element>
     <global-element name="MySQL Configuration" type="http://www.mulesoft.org/schema/mule/db/mysql-config" entity-id="MySQL Configuration#1">
@@ -70,9 +70,9 @@
             <property name="url"/>
             <property name="connectionTimeout"/>
             <property name="dataSource-ref"/>
-            <property name="name" value="MySQL_Configuration"/>
-            <property name="databaseParametersConf"/>
             <property name="springBeanConf"/>
+            <property name="databaseParametersConf"/>
+            <property name="name" value="MySQL_Configuration"/>
             <property name="useXaTransactions"/>
             <property name="databaseURLConf"/>
             <property name="user" value="mule"/>
@@ -82,15 +82,15 @@
     <global-element name="xml_to_map" type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" entity-id="DataMapper#1">
         <properties>
             <property name="name" value="xml_to_map"/>
-            <property name="auxiliary;index" value="9"/>
             <property name="transformationGraphPath" value="xml_to_map.grf"/>
+            <property name="auxiliary;index" value="9"/>
         </properties>
     </global-element>
     <global-element name="XML_To_Pojo" type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" entity-id="DataMapper#2">
         <properties>
             <property name="name" value="XML_To_Pojo"/>
-            <property name="auxiliary;index" value="10"/>
             <property name="transformationGraphPath" value="xml_to_pojo.grf"/>
+            <property name="auxiliary;index" value="10"/>
         </properties>
     </global-element>
     <global-unknown description="false" index="11" entity-id="global-unknown#2">
@@ -110,20 +110,20 @@
             <property name="lazy-init"/>
             <property name="auxiliary;wrappedIn" value="beans@spring@http://www.springframework.org/schema/beans"/>
             <property name="id"/>
-            <property name="name" value="NoFactsBean"/>
             <property name="primary"/>
+            <property name="name" value="NoFactsBean"/>
             <property name="autowire"/>
             <property name="destroy-method"/>
-            <property name="auxiliary;wrapIn" value="12"/>
             <property name="auxiliary;index" value="13"/>
+            <property name="auxiliary;wrapIn" value="12"/>
             <property name="depends-on"/>
         </properties>
     </global-element>
     <global-element name="Pojo_To_XML" type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" entity-id="DataMapper#3">
         <properties>
             <property name="name" value="Pojo_To_XML"/>
-            <property name="auxiliary;index" value="14"/>
             <property name="transformationGraphPath" value="pojo_to_xml.grf"/>
+            <property name="auxiliary;index" value="14"/>
         </properties>
     </global-element>
     <flow SubFlow="false" name="DiscountserviceFlow1" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="f5116706-68fd-4f3c-81a3-14f58c658326">
@@ -152,18 +152,18 @@
                     <property name="tracking:enable-default-events"/>
                     <property name="exchange-pattern" value="request-response"/>
                     <property name="ref"/>
-                    <property name="httpLabel"/>
                     <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
                     <property name="address"/>
-                    <property name="encoding"/>
                     <property name="path" value="discount-service"/>
+                    <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
                     <property name="method"/>
                     <property name="user"/>
-                    <property name="responseTimeout"/>
-                    <property name="mimeType"/>
-                    <property name="connector-ref-outbound" value="httpsConnector"/>
                     <property name="auxiliary;index" value="16"/>
+                    <property name="connector-ref-outbound" value="httpsConnector"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
                     <property name="connector-ref" value="httpsConnector"/>
                 </properties>
             </endpoint>
@@ -182,8 +182,8 @@
                     <property name="onException"/>
                     <property name="service" value="DiscountService"/>
                     <property name="mtomEnabled"/>
-                    <property name="soapVersion"/>
                     <property name="enableMuleSoapHeaders"/>
+                    <property name="soapVersion"/>
                     <property name="auxiliary;index" value="17"/>
                 </properties>
             </pattern>
@@ -191,8 +191,8 @@
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="variableName" value="opName"/>
-                    <property name="value" value="#[xpath('fn:local-name(/*)')]"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+                    <property name="value" value="#[xpath('fn:local-name(/*)')]"/>
                     <property name="auxiliary;index" value="18"/>
                 </properties>
             </pattern>
@@ -203,8 +203,8 @@
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
                     <property name="outputEncoding"/>
-                    <property name="auxiliary;index" value="19"/>
                     <property name="mimeType"/>
+                    <property name="auxiliary;index" value="19"/>
                 </properties>
             </pattern>
             <splitter index="20" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
@@ -245,12 +245,12 @@
                             <graphicalData x="784" y="192" width="148" height="80"/>
                             <properties>
 <property name="returnClass"/>
-<property name="stream"/>
 <property name="input-ref"/>
-<property name="target"/>
+<property name="stream"/>
 <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform"/>
-<property name="pipeSize"/>
+<property name="target"/>
 <property name="config-ref" value="XML_To_Pojo"/>
+<property name="pipeSize"/>
 <property name="auxiliary;index" value="22"/>
                             </properties>
                         </pattern>
@@ -269,12 +269,12 @@
                             <graphicalData x="1396" y="199" width="80" height="67"/>
                             <properties>
 <property name="returnClass"/>
-<property name="stream"/>
 <property name="input-ref"/>
-<property name="target"/>
+<property name="stream"/>
 <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform"/>
-<property name="pipeSize"/>
+<property name="target"/>
 <property name="config-ref" value="Pojo_To_XML"/>
+<property name="pipeSize"/>
 <property name="auxiliary;index" value="25"/>
                             </properties>
                         </pattern>
@@ -288,14 +288,14 @@
 <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
     <property name="text" value="throw new RuntimeException(&quot;Unknown Operation: &quot; + flowVars.opName);"/>
     <property name="engine" value="Groovy"/>
-    <property name="auxiliary;index" value="28"/>
     <property name="auxiliary;wrapIn" value="28"/>
+    <property name="auxiliary;index" value="28"/>
 </property-collection>
 <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script-for-properties;0">
     <property name="text" value="throw new RuntimeException(&quot;Unknown Operation: &quot; + flowVars.opName);"/>
     <property name="engine" value="Groovy"/>
-    <property name="auxiliary;index" value="28"/>
     <property name="auxiliary;wrapIn" value="28"/>
+    <property name="auxiliary;index" value="28"/>
 </property-collection>
                             </properties>
                         </pattern>

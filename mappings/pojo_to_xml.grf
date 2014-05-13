@@ -77,7 +77,7 @@
 output.__id = input.__id;
 //END -> DO NOT REMOVE
 output.Discount = input.discountPercentage * input.totalValue;;
-output.LoyaltyPoints = input.newLoyaltyPoints + input.loyaltyPoints;
+output.LoyaltyPoints = input.newLoyaltyPoints;
 output.TotalCost = input.totalValue - (input.totalValue * input.discountPercentage);]]></attr>
 </Node>
 <Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="fbbc0567-c264-4de0-9efc-eb7f4f53d2f2" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_NS0_CALCULATE_DISCOUNT_RESPONSE:0"/>
