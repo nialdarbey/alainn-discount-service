@@ -41,7 +41,7 @@ Utility Service responsible for calculating Disount's for Customer Orders and di
 ````
 
 * Result is accessed using **#[payload.object]**
-* **Rules**
+* **Rules** are fired by matching a Rule definition with an instance of OrderSummary whose fields (loyaltyPoints and totalValue) fall with certain ranges. The firing rule sets data on the same OrderSummary instance.
 ````java
 	package com.alainn.soa.rules.discount;
 
