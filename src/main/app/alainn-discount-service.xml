@@ -39,11 +39,10 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 		<mulexml:namespace prefix="mod"
 			uri="http://www.alainn.com/SOA/model/1.0" />
 	</mulexml:namespace-manager>
-	<context:property-placeholder location="config.prod.properties" />
-
+    <secure-property-placeholder:config name="Secure_Property_Placeholder" key="${props.key}" location="config.${env}.properties" doc:name="Secure Property Placeholder"/>
 	<db:mysql-config name="MySQL_Configuration"
-		host="mule-demo-repository.cdumb7bgzajt.us-east-1.rds.amazonaws.com"
-		port="3306" user="mule" password="Mule1379" database="alainn"
+		host="${db.host}"
+		port="3306" user="${db.user}" password="${db.password}" database="${db.database}"
 		doc:name="MySQL Configuration" />
     <data-mapper:config name="xml_to_map" transformationGraphPath="xml_to_map.grf" doc:name="xml_to_map"/>
     <data-mapper:config name="XML_To_Pojo" transformationGraphPath="xml_to_pojo.grf" doc:name="XML_To_Pojo"/>
